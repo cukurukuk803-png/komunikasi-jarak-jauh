@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - ChatApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-panel-container">
+        <header class="admin-header">
+            <h1><i class="fas fa-user-shield"></i> Admin Panel ChatApp</h1>
+            <button id="logout-admin" class="btn btn-secondary">
+                <i class="fas fa-sign-out-alt"></i> Keluar
+            </button>
+        </header>
+
+        <div class="admin-main">
+            <div class="admin-sidebar">
+                <nav class="admin-nav">
+                    <a href="#dashboard" class="nav-item active">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a href="#users" class="nav-item">
+                        <i class="fas fa-users"></i> Pengguna
+                    </a>
+                    <a href="#numbers" class="nav-item">
+                        <i class="fas fa-phone"></i> Nomor Tersedia
+                    </a>
+                    <a href="#generate" class="nav-item">
+                        <i class="fas fa-plus-circle"></i> Generate Nomor
+                    </a>
+                    <a href="#stats" class="nav-item">
+                        <i class="fas fa-chart-bar"></i> Statistik
+                    </a>
+                </nav>
+            </div>
+
+            <div class="admin-content">
+                <!-- Dashboard -->
+                <section id="dashboard" class="admin-section active">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 id="total-users">0</h3>
+                            <p>Total Pengguna</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3 id="total-chats">0</h3>
+                            <p>Total Chat</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3 id="available-numbers">0</h3>
+                            <p>Nomor Tersedia</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 id="active-now">0</h3>
+                            <p>Aktif Sekarang</p>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3><i class="fas fa-history"></i> Aktivitas Terbaru</h3>
+                        <div class="activity-list" id="activity-list">
+                            <!-- Activities will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users Management -->
+                <section id="users" class="admin-section">
+                    <h2><i class="fas fa-users"></i> Manajemen Pengguna</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-users" placeholder="Cari pengguna...">
+                    </div>
+                    <div class="users-table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Nomor</th>
+                                    <th>Status</th>
+                                    <th>Tanggal Daftar</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- Users will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Available Numbers -->
+                <section id="numbers" class="admin-section">
+                    <h2><i class="fas fa-phone"></i> Nomor Tersedia</h2>
+                    <div class="numbers-controls">
+                        <button id="refresh-numbers" class="btn btn-primary">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                        <button id="generate-batch" class="btn btn-success">
+                            <i class="fas fa-bolt"></i> Generate 10 Nomor
+                        </button>
+                    </div>
+                    <div class="numbers-grid" id="numbers-grid">
+                        <!-- Numbers will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Generate Numbers -->
+                <section id="generate" class="admin-section">
+                    <h2><i class="fas fa-plus-circle"></i> Generate Nomor Baru</h2>
+                    <div class="generate-form">
+                        <div class="input-group">
+                            <label for="generate-count">Jumlah Nomor</label>
+                            <input type="number" id="generate-count" min="1" max="100" value="5">
+                        </div>
+                        <div class="input-group">
+                            <label for="number-prefix">Prefix Nomor</label>
+                            <select id="number-prefix">
+                                <option value="628">Indonesia (+62)</option>
+                                <option value="1">USA (+1)</option>
+                                <option value="44">UK (+44)</option>
+                                <option value="81">Japan (+81)</option>
+                            </select>
+                        </div>
+                        <button id="generate-submit" class="btn btn-primary">
+                            <i class="fas fa-magic"></i> Generate Nomor
+                        </button>
+                    </div>
+                    <div class="generated-result" id="generated-result">
+                        <!-- Generated numbers will appear here -->
+                    </div>
+                </section>
+
+                <!-- Statistics -->
+                <section id="stats" class="admin-section">
+                    <h2><i class="fas fa-chart-bar"></i> Statistik</h2>
+                    <div class="charts-container">
+                        <div class="chart-box">
+                            <h3>Pertumbuhan Pengguna</h3>
+                            <canvas id="users-chart"></canvas>
+                        </div>
+                        <div class="chart-box">
+                            <h3>Distribusi Status</h3>
+                            <canvas id="status-chart"></canvas>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-panel.js"></script>
+</body>
+</html>
