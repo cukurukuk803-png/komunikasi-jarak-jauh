@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp - Chat Sejauh Apapun</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="screen">
+        <div class="splash-content">
+            <div class="logo-container">
+                <i class="fas fa-comments logo-icon"></i>
+                <h1 class="app-name">ChatApp</h1>
+            </div>
+            <p class="app-tagline">Chat sejauh apapun, tetap terhubung</p>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen hidden">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-comments logo-icon"></i>
+                <h1>ChatApp</h1>
+                <p>Masuk atau daftar untuk mulai mengobrol</p>
+            </div>
+            
+            <div class="login-form">
+                <div class="input-group">
+                    <label for="phone-number"><i class="fas fa-phone"></i> Nomor ChatApp</label>
+                    <input type="text" id="phone-number" placeholder="Contoh: 628123456789">
+                    <p class="input-hint">Belum punya nomor? <span id="buy-number-link" class="link">Beli nomor baru</span></p>
+                </div>
+                
+                <div class="input-group">
+                    <label for="display-name"><i class="fas fa-user"></i> Nama Tampilan</label>
+                    <input type="text" id="display-name" placeholder="Masukkan nama Anda">
+                </div>
+                
+                <button id="login-btn" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Masuk ke ChatApp
+                </button>
+                
+                <div class="divider">
+                    <span>Atau</span>
+                </div>
+                
+                <button id="admin-access-btn" class="btn btn-secondary">
+                    <i class="fas fa-key"></i> Akses Admin
+                </button>
+                
+                <div class="terms">
+                    <p>Dengan melanjutkan, Anda menyetujui <a href="#" class="link">Syarat & Ketentuan</a> kami.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Access Screen -->
+    <div id="admin-screen" class="screen hidden">
+        <div class="admin-container">
+            <div class="admin-header">
+                <button id="back-to-login" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2><i class="fas fa-user-shield"></i> Akses Admin</h2>
+            </div>
+            
+            <div class="admin-form">
+                <div class="input-group">
+                    <label for="admin-code"><i class="fas fa-lock"></i> Kode Admin</label>
+                    <input type="password" id="admin-code" placeholder="Masukkan kode admin">
+                    <p class="input-hint">Kode admin: "Larei"</p>
+                </div>
+                
+                <button id="verify-admin-btn" class="btn btn-primary">
+                    <i class="fas fa-check"></i> Verifikasi
+                </button>
+                
+                <div class="admin-info">
+                    <h3><i class="fas fa-info-circle"></i> Informasi Admin</h3>
+                    <p>Dengan akses admin, Anda dapat:</p>
+                    <ul>
+                        <li><i class="fas fa-plus-circle"></i> Buat nomor chat baru</li>
+                        <li><i class="fas fa-list"></i> Lihat semua nomor aktif</li>
+                        <li><i class="fas fa-chart-bar"></i> Pantau statistik penggunaan</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Number Screen -->
+    <div id="buy-number-screen" class="screen hidden">
+        <div class="buy-number-container">
+            <div class="buy-number-header">
+                <button id="back-from-buy" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2><i class="fas fa-shopping-cart"></i> Beli Nomor Baru</h2>
+            </div>
+            
+            <div class="buy-number-form">
+                <div class="input-group">
+                    <label for="admin-code-buy"><i class="fas fa-key"></i> Kode Akses</label>
+                    <input type="password" id="admin-code-buy" placeholder="Masukkan kode akses">
+                </div>
+                
+                <div class="package-options">
+                    <div class="package-card" data-package="basic">
+                        <h3><i class="fas fa-star"></i> Paket Basic</h3>
+                        <p class="price">GRATIS</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 1 Nomor Chat</li>
+                            <li><i class="fas fa-check"></i> Chat Unlimited</li>
+                            <li><i class="fas fa-check"></i> Profil Custom</li>
+                        </ul>
+                        <button class="btn-package">Pilih Paket</button>
+                    </div>
+                    
+                    <div class="package-card featured" data-package="premium">
+                        <div class="badge">POPULAR</div>
+                        <h3><i class="fas fa-crown"></i> Paket Premium</h3>
+                        <p class="price">Rp 50.000</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 3 Nomor Chat</li>
+                            <li><i class="fas fa-check"></i> Tema Exclusive</li>
+                            <li><i class="fas fa-check"></i> Prioritas Support</li>
+                        </ul>
+                        <button class="btn-package">Pilih Paket</button>
+                    </div>
+                </div>
+                
+                <button id="generate-number-btn" class="btn btn-primary hidden">
+                    <i class="fas fa-bolt"></i> Generate Nomor
+                </button>
+                
+                <div id="generated-number" class="generated-number hidden">
+                    <h3><i class="fas fa-gift"></i> Nomor Baru Anda:</h3>
+                    <div class="number-display">
+                        <span id="new-number">628XXXXXXXXXX</span>
+                        <button id="copy-number" class="btn-icon">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="success-msg">Nomor telah disimpan! Gunakan untuk login.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Chat Screen -->
+    <div id="chat-screen" class="screen hidden">
+        <div class="chat-container">
+            <!-- Chat Header -->
+            <header class="chat-header">
+                <div class="profile-section" id="profile-btn">
+                    <img src="https://ui-avatars.com/api/?name=User&background=25D366&color=fff" 
+                         alt="Profile" class="profile-img" id="profile-img">
+                    <div class="profile-info">
+                        <h3 id="current-user-name">User</h3>
+                        <p id="current-user-status">Online</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="header-btn" id="menu-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Profile Sidebar -->
+            <div id="profile-sidebar" class="sidebar hidden">
+                <div class="sidebar-header">
+                    <button class="back-btn" id="close-profile">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h3>Profil</h3>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-picture-section">
+                        <img src="https://ui-avatars.com/api/?name=User&background=25D366&color=fff&size=128" 
+                             alt="Profile" class="profile-picture-large">
+                        <button class="btn-change-photo">
+                            <i class="fas fa-camera"></i> Ganti Foto
+                        </button>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <label>Nama</label>
+                            <input type="text" id="profile-name" value="User">
+                            <button class="btn-edit" id="edit-name">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="detail-item">
+                            <label>Status</label>
+                            <input type="text" id="profile-status" value="Online">
+                            <button class="btn-edit" id="edit-status">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="detail-item">
+                            <label>Nomor ChatApp</label>
+                            <span class="detail-value" id="profile-number">628XXXXXXXXXX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contacts List -->
+            <div class="contacts-container" id="contacts-container">
+                <div class="contacts-header">
+                    <h2>Chats</h2>
+                    <button class="btn-new-chat" id="new-chat-btn">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Cari chat..." id="search-contacts">
+                </div>
+                
+                <div class="contacts-list" id="contacts-list">
+                    <!-- Contacts will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Individual Chat -->
+            <div id="chat-window" class="chat-window hidden">
+                <div class="chat-header-inner">
+                    <button class="back-btn" id="back-to-contacts">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="chat-contact-info">
+                        <img src="https://ui-avatars.com/api/?name=Contact&background=34B7F1&color=fff" 
+                             alt="Contact" class="contact-img">
+                        <div>
+                            <h3 id="chat-contact-name">Contact</h3>
+                            <p id="chat-contact-status">Online</p>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="header-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                        <button class="header-btn">
+                            <i class="fas fa-video"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="messages-container" id="messages-container">
+                    <!-- Messages will be loaded here -->
+                </div>
+                
+                <div class="message-input-container">
+                    <button class="input-btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="message-input-wrapper">
+                        <input type="text" placeholder="Ketik pesan..." id="message-input">
+                        <button class="input-btn">
+                            <i class="fas fa-smile"></i>
+                        </button>
+                    </div>
+                    <button id="send-message" class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">
+        <i class="fas fa-bell"></i>
+        <span id="notification-text"></span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
